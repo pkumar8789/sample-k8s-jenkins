@@ -21,4 +21,4 @@ spec:
         #The Docker image for building the nginx application container
         image: nginx:latest 
         ports:
-        - containerPort: 3000 #The port for the nginx application container
+        - containerPort: 80 #The port for the nginx application container
