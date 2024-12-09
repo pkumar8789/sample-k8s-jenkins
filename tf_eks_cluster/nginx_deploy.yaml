@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      labels:
+        app: sample
+    spec:
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: node-group-2-20241209021745098500000018
+      containers:
+      - name: nginx-cont
+        image: nginx
+        ports:
+        - containerPort: 80
