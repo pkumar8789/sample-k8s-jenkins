@@ -4,10 +4,12 @@ metadata:
   #The name of the Kubernetes Service to be created 
   #in the Kubernetes cluster
   name: myservice 
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
   selector:
     app: nginx-app 
-  type: Ingress #Type of the Kubernetes Service
+  type: LoadBalancer #Type of the Kubernetes Service
   ports:
   - protocol: TCP
     port: 3000 #Service port
