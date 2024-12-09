@@ -4,21 +4,21 @@ metadata:
   name: deploymentgreen #The name of the Kubernetes 
         #Deployment to be created in the Kubernetes cluster
   labels:
-    app: busybox-app
+    app: fedora-apache
 spec:
   replicas: 2 #The number of pods to be created in the 
-   #Kubernetes cluster for the busybox application container
+   #Kubernetes cluster for the fedora-apache application container
   selector:
     matchLabels:
-      app: busybox-app
+      app: fedora-apache
   template:
     metadata:
       labels:
-        app: busybox-app 
+        app: fedora-apache 
     spec:
       containers:
-      - name: busybox-app #The name of the busybox application container
-        #The Docker image for building the busybox application container
-        image: busybox:latest 
+      - name: fedora-apache #The name of the fedora-apache application container
+        #The Docker image for building the fedora-apache application container
+        image: fedora/apache 
         ports:
-        - containerPort: 3000 #The port for the busybox application container
+        - containerPort: 80 #The port for the fedora-apache application container
