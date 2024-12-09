@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout SCM'){
+            steps{
+                script{
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pkumar8789/sample-k8s-jenkins.git']])
+                }
+            }
+        }
+		stage('Set AWS Configure') {
+            steps {
+                 script{
+                    sh 'aws configure set aws_access_key_id <>'
+					sh 'aws configure set aws_secret_access_key <>'
+					   }
+            }
+        }
+        stage('Test EKS') {
+            steps {
+                //Note: Replace below function with your generated pipeline script
+                withKubeConfig(caCertificate: '', clusterName: 'arn:aws:eks:us-east-1:484907505643:cluster/demo-eks-WzlTFb5S', contextName: 'arn:aws:eks:us-east-1:484907505643:cluster/demo-eks-WzlTFb5S', credentialsId: 'kubeconfigeks', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://6B85DD2953F694FB62D40DE2091E745A.gr7.us-east-1.eks.amazonaws.com') {
+                    //sh "kubectl get ns"
+                    sh "kubectl create -f deployment_blue.yaml"
+                    sh "kubectl create -f svc_blue.yaml"
+                }
+            }
+        }
+    }
+}
