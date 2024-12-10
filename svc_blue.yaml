@@ -5,7 +5,7 @@ metadata:
   #in the Kubernetes cluster
   name: myservice 
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    service.beta.kubernetes.io/aws-load-balancer-type: external
 spec:
   selector:
     app: nginx-app 
