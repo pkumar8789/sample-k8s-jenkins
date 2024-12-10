@@ -3,7 +3,9 @@ kind: Service
 metadata:
   #The name of the Kubernetes Service to be created 
   #in the Kubernetes cluster
-  name: myservice 
+  name: myservice
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
 spec:
   selector:
     app: fedora-apache 
